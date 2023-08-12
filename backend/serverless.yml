@@ -6,12 +6,18 @@ provider:
   runtime: nodejs18.x
 
 functions:
-  hello:
-    handler: handler.hello
+  getQuiz:
+    handler: src/application_layer/getQuiz.get
     events:
       - httpApi:
           path: /
           method: get
+  validateAnswer:
+    handler: src/application_layer/validateAnswer.validate
+    events:
+      - httpApi:
+          path: /
+          method: post
 
 
 plugins:
