@@ -1,17 +1,16 @@
 import axios from 'axios';
 
-var config = {
+const config = {
   method: 'get',
-  url: 'https://countriesnow.space/api/v0.1/countries/capital',
-  headers: {}
+  url: 'https://countriesnow.space/api/v0.1/countries/capital'
 };
 
 export async function getCountriesCapitals() {
   const response = await axios(config)
 
-  const stringifiedResponse = response.data
+  const { data } = response
 
-  return stringifiedResponse.data;
+  return data;
 }
 
 export default {

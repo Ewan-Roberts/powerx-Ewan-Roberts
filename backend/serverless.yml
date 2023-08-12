@@ -7,7 +7,7 @@ provider:
 
 functions:
   getQuiz:
-    handler: src/application_layer/getQuiz.get
+    handler: src/application_layer/getQuiz.handler
     events:
       - httpApi:
           path: /

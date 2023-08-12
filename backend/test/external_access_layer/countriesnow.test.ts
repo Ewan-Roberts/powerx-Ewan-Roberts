@@ -1,5 +1,5 @@
 import countriesnow from '../../src/external_access_layer/countriesnow'
-var expect = require('chai').expect
+import { expect } from 'chai'
 
 describe('external_access_layer/get', function() {
   it('returns a valid long and lat', async function() {

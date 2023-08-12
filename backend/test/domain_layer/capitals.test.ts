@@ -1,12 +1,13 @@
 import captials from '../../src/domain_layer/capitals'
-var expect = require('chai').expect
+import { expect } from 'chai'
 
 describe('domain_layer/capitals', function() {
-  xdescribe('getRandomCountryCapitals()', function() {
-    it('returns a valid long and lat', async function() {
-      const foo = await captials.getRandomCountryCapitals()
+  describe('getRandomCountryCapitals()', function() {
+    it('returns a value', async function() {
+      // Normally I would mock the api response to get a clearer test result
+      const response = await captials.getRandomCountryCapitals()
 
-      console.log(foo)
+      expect(response).to.be.ok
     });
   });
 
@@ -28,18 +29,16 @@ describe('domain_layer/capitals', function() {
     it('returns not found message', async function() {
       const country = 'I DONT EXIST'
       const capital = 'London'
-      const actual = await captials.validateCountryCapital(country, capital)
-
-      const expected = {
-        message: 'Country not found',
+      try {
+        await captials.validateCountryCapital(country, capital)
+      } catch(error) {
+        expect(error.message).to.equal('Country not found')
       }
-
-      expect(actual).to.deep.equal(expected)
     });
 
     it('returns fail message and correct answer', async function() {
       const country = 'United Kingdom'
-      const capital = 'CheeseTown'
+      const capital = 'Hyrule Castle'
       const actual = await captials.validateCountryCapital(country, capital)
 
       const expected = {

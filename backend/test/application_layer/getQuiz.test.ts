@@ -1,14 +1,18 @@
-var axios = require('axios');
+import axios from 'axios';
+import { expect } from 'chai'
 
-describe('application_layer/get', function() {
-  it('returns a valid long and lat', async function() {
-    console.log('hi')
-    var config = {
+describe('GET http://localhost:3000', function() {
+  it('returns a valid response', async function() {
+    const config = {
       method: 'get',
       url: 'http://localhost:3000',
     };
 
     const response = await axios(config)
-    console.log(response)
+
+    expect(response).to.be.ok
+    expect(response.data.statusCode).to.equal(200)
+    expect(response.data.country).to.exist
+    expect(response.data.capitals).to.exist
   });
 });

@@ -1,9 +1,22 @@
 import captials from '../domain_layer/capitals'
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
-export async function validate(event: any) {
+export async function validate(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
   const { country, capital } = JSON.parse(event.body);
 
-  const countryCaptialData = await captials.validateCountryCapital(country, capital);
+  try {
+    const countryCaptialData = await captials.validateCountryCapital(country, capital);
 
-  return JSON.stringify(countryCaptialData);
+    return JSON.stringify({
+      statusCode: 200,
+      ...countryCaptialData
+    });
+  } catch(error) {
+    return JSON.stringify({
+      statusCode: 500,
+      message: error.message
+    });
+  }
 }

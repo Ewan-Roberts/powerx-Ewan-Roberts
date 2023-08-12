@@ -13594,13 +13594,12 @@ var {
 // src/external_access_layer/countriesnow.ts
 var config = {
   method: "get",
-  url: "https://countriesnow.space/api/v0.1/countries/capital",
-  headers: {}
+  url: "https://countriesnow.space/api/v0.1/countries/capital"
 };
 async function getCountriesCapitals() {
   const response = await axios_default(config);
-  const stringifiedResponse = response.data;
-  return stringifiedResponse.data;
+  const { data } = response;
+  return data;
 }
 var countriesnow_default = {
   getCountriesCapitals
@@ -13638,9 +13637,7 @@ async function validateCountryCapital(countryName, capitalName) {
   const countryCapitalData = await countriesnow_default.getCountriesCapitals();
   const foundCountry = countryCapitalData.find((country) => country.name === countryName);
   if (!foundCountry) {
-    return {
-      message: "Country not found"
-    };
+    throw new Error("Country not found");
   }
   if (foundCountry.capital === capitalName) {
     return {
@@ -13665,8 +13662,18 @@ var capitals_default = {
 // src/application_layer/validateAnswer.ts
 async function validate(event) {
   const { country, capital } = JSON.parse(event.body);
-  const countryCaptialData = await capitals_default.validateCountryCapital(country, capital);
-  return JSON.stringify(countryCaptialData);
+  try {
+    const countryCaptialData = await capitals_default.validateCountryCapital(country, capital);
+    return JSON.stringify({
+      statusCode: 200,
+      ...countryCaptialData
+    });
+  } catch (error) {
+    return JSON.stringify({
+      statusCode: 500,
+      message: error.message
+    });
+  }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

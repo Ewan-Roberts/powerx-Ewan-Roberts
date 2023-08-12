@@ -10650,14 +10650,14 @@ var require_follow_redirects = __commonJS({
           debug("options", options);
           return new RedirectableRequest(options, callback);
         }
-        function get2(input, options, callback) {
+        function get(input, options, callback) {
           var wrappedRequest = wrappedProtocol.request(input, options, callback);
           wrappedRequest.end();
           return wrappedRequest;
         }
         Object.defineProperties(wrappedProtocol, {
           request: { value: request, configurable: true, enumerable: true, writable: true },
-          get: { value: get2, configurable: true, enumerable: true, writable: true }
+          get: { value: get, configurable: true, enumerable: true, writable: true }
         });
       });
       return exports2;
@@ -10730,7 +10730,7 @@ var require_follow_redirects = __commonJS({
 // src/application_layer/getQuiz.ts
 var getQuiz_exports = {};
 __export(getQuiz_exports, {
-  get: () => get
+  handler: () => handler
 });
 module.exports = __toCommonJS(getQuiz_exports);
 
@@ -13594,13 +13594,12 @@ var {
 // src/external_access_layer/countriesnow.ts
 var config = {
   method: "get",
-  url: "https://countriesnow.space/api/v0.1/countries/capital",
-  headers: {}
+  url: "https://countriesnow.space/api/v0.1/countries/capital"
 };
 async function getCountriesCapitals() {
   const response = await axios_default(config);
-  const stringifiedResponse = response.data;
-  return stringifiedResponse.data;
+  const { data } = response;
+  return data;
 }
 var countriesnow_default = {
   getCountriesCapitals
@@ -13638,9 +13637,7 @@ async function validateCountryCapital(countryName, capitalName) {
   const countryCapitalData = await countriesnow_default.getCountriesCapitals();
   const foundCountry = countryCapitalData.find((country) => country.name === countryName);
   if (!foundCountry) {
-    return {
-      message: "Country not found"
-    };
+    throw new Error("Country not found");
   }
   if (foundCountry.capital === capitalName) {
     return {
@@ -13663,7 +13660,7 @@ var capitals_default = {
 };
 
 // src/application_layer/getQuiz.ts
-async function get(event) {
+async function handler(event) {
   const countryCaptialData = await capitals_default.getRandomCountryCapitals();
   return JSON.stringify({
     statusCode: 200,
@@ -13672,7 +13669,7 @@ async function get(event) {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  get
+  handler
 });
 /*!
  * mime-db

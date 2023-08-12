@@ -1,6 +1,11 @@
 import countriesnow from '../external_access_layer/countriesnow'
 
-function getRandomArrayIndex(array) {
+function getRandomArrayIndex(array: Array<{
+  name: string;
+  capital: string;
+  iso2: string;
+  iso3: string;
+}>) {
   const randomIndex = Math.floor(Math.random()*array.length);
 
   return randomIndex
@@ -16,7 +21,10 @@ function randNum(array, excludeIndex) {
   return randNumber;
 }
 
-export async function getRandomCountryCapitals() {
+export async function getRandomCountryCapitals(): Promise<{
+  country: string;
+  capitals: Array<string>;
+}> {
   const countryCapitalData = await countriesnow.getCountriesCapitals();
 
   const indexOfCorrectCountry = getRandomArrayIndex(countryCapitalData);
@@ -39,15 +47,17 @@ export async function getRandomCountryCapitals() {
   return options
 }
 
-export async function validateCountryCapital(countryName, capitalName) {
+export async function validateCountryCapital(countryName: string, capitalName: string): Promise<{
+  message: string;
+  country: string;
+  capital: string;
+}> {
   const countryCapitalData = await countriesnow.getCountriesCapitals();
 
   const foundCountry = countryCapitalData.find(country => country.name === countryName)
 
   if(!foundCountry) {
-    return {
-      message: 'Country not found',
-    }
+    throw new Error('Country not found')
   }
 
   if(foundCountry.capital === capitalName) {
