@@ -2,11 +2,17 @@ import countriesnow from '../../src/external_access_layer/countriesnow'
 import { expect } from 'chai'
 
 describe('external_access_layer/get', function() {
-  it('returns a valid long and lat', async function() {
-    const foo = await countriesnow.getCountriesCapitals()
+  it('returns a response', async function() {
+    const actual = await countriesnow.getCountriesCapitals()
 
-    expect(foo.error).to.equal(false)
+    expect(actual).to.be.ok
   });
 
-  // add test to filter out countries without capitals
+  it('excludes countries without captials', async function() {
+    const actual = await countriesnow.getCountriesCapitals()
+
+    const countryWithoutCapital = actual.find(country => country.name === 'Bouvet Island')
+
+    expect(countryWithoutCapital).to.not.exist
+  });
 });

@@ -6,7 +6,16 @@ button {
   width: 300px;
   height: 50px;
   font-size: medium;
-  background-color: #7CB9E8
+  background-color: #7CB9E8;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #bedcf4
+}
+
+button:active {
+  background-color: #96c7ed;
 }
 
 .App-logo {

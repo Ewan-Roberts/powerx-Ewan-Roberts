@@ -13598,8 +13598,9 @@ var config = {
 };
 async function getCountriesCapitals() {
   const response = await axios_default(config);
-  const { data } = response;
-  return data;
+  const { data } = response.data;
+  const filteredCountries = data.filter((country) => country.capital);
+  return filteredCountries;
 }
 var countriesnow_default = {
   getCountriesCapitals
@@ -13664,7 +13665,7 @@ async function handler(event) {
   const countryCaptialData = await capitals_default.getRandomCountryCapitals();
   return JSON.stringify({
     statusCode: 200,
-    data: countryCaptialData
+    ...countryCaptialData
   });
 }
 // Annotate the CommonJS export names for ESM import in node:

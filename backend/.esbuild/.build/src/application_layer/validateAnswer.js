@@ -13598,8 +13598,9 @@ var config = {
 };
 async function getCountriesCapitals() {
   const response = await axios_default(config);
-  const { data } = response;
-  return data;
+  const { data } = response.data;
+  const filteredCountries = data.filter((country) => country.capital);
+  return filteredCountries;
 }
 var countriesnow_default = {
   getCountriesCapitals

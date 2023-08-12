@@ -8,6 +8,6 @@ export async function handler(
 
   return JSON.stringify({
     statusCode: 200,
-    data: countryCaptialData
+    ...countryCaptialData
   });
 }
