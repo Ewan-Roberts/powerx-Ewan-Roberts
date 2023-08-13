@@ -4,7 +4,7 @@ The project is split into frontend and backend
 
 ## Backend Getting Started
 ```
-You will likely need `serverless` installed globally
+# You will likely need `serverless` installed globally
 npm i -g serverless
 
 cd backend
