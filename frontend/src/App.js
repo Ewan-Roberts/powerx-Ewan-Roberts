@@ -3,29 +3,31 @@ import './App.css';
 
 const API_ENDPOINT = 'http://localhost:9090';
 
-function valiadateResponse(event, posts) {
+function valiadateResponse(event, quiz) {
   const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         capital: event.target.value,
-        country: posts?.country
+        country: quiz?.country
       })
   };
   fetch(API_ENDPOINT, requestOptions)
     .then(response => response.json())
-    .then(data => {
+    .then(({ message, country, capital })=> {
       alert(
         `
-          ${data.message}
-          The country: ${data.country}
-          has the capital: ${data.capital}
+         ${message}
+
+         The country:       ${country}
+         Has the capital:   ${capital}
         `
       )
-      .catch(err => alert(err.message));
 
       window.location.reload(false);
-    });
+    })
+    .catch(err => alert(err.message));
+  ;
 }
 
 function App() {
