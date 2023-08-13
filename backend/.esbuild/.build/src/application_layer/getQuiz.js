@@ -13661,7 +13661,7 @@ var capitals_default = {
 };
 
 // src/application_layer/getQuiz.ts
-async function handler(event) {
+async function handler() {
   const countryCaptialData = await capitals_default.getRandomCountryCapitals();
   return JSON.stringify({
     statusCode: 200,

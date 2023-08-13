@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function valiadateResponse(e, posts) {
-  console.log(e.target.value)
-  console.log(posts?.country)
+function valiadateResponse(event, posts) {
   const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        capital: e.target.value,
+        capital: event.target.value,
         country: posts?.country
       })
   };
-  fetch('http://localhost:3000', requestOptions)
+  fetch('http://localhost:9090', requestOptions)
       .then(response => response.json())
       .then(data => {
         console.log(data)
@@ -29,10 +27,9 @@ function valiadateResponse(e, posts) {
 }
 
 function App() {
-   let [posts, setPosts] = useState([]);
-   posts.captials = [0,1,2]
+   const [posts, setPosts] = useState([]);
    useEffect(() => {
-      fetch('http://localhost:3000')
+      fetch('http://localhost:9090')
          .then((response) => response.json())
          .then((data) => {
             console.log(data);
@@ -54,22 +51,46 @@ function App() {
 
         <button
           value={(posts?.capitals)?posts?.capitals[0]:[]}
-          onClick={(e) => valiadateResponse(e, posts)}> {(posts?.capitals)? posts?.capitals[0]: 'Loading...'}
+          onClick={(e) => valiadateResponse(e, posts)}> {
+            (posts?.capitals)?
+            posts?.capitals[0]:
+            'Loading...'
+          }
         </button>
 
         <br></br>
 
         <button
           value={(posts?.capitals)?posts?.capitals[1]:[]}
-          onClick={(e) => valiadateResponse(e, posts)}> {(posts?.capitals)? posts?.capitals[1]: 'Loading...'}
+          onClick={(e) => valiadateResponse(e, posts)}> {
+            (posts?.capitals)?
+            posts?.capitals[1]:
+            'Loading...'
+          }
         </button>
 
         <br></br>
 
         <button
           value={(posts?.capitals)?posts?.capitals[2]:[]}
-          onClick={(e) => valiadateResponse(e, posts)}> {(posts?.capitals)? posts?.capitals[2]: 'Loading...'}
+          onClick={(e) => valiadateResponse(e, posts)}> {
+            (posts?.capitals)?
+            posts?.capitals[2]:
+            'Loading...'
+          }
         </button>
+
+        <br></br>
+        <br></br>
+        <br></br>
+
+        <button
+          onClick={(e) => window.location.reload(false)}> {
+            'RESTART'
+          }
+        </button>
+
+        <br></br>
       </header>
     </div>
   );

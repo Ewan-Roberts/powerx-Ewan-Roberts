@@ -6,6 +6,7 @@ export async function validate(
 ): Promise<APIGatewayProxyResult> {
   const { country, capital } = JSON.parse(event.body);
 
+  // TODO Add joi schema validation here
   try {
     const countryCaptialData = await captials.validateCountryCapital(country, capital);
 

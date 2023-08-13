@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { expect } from 'chai'
 
-describe('GET http://localhost:3000', function() {
+describe('GET http://localhost:9090', function() {
   it('returns a valid response', async function() {
     const config = {
       method: 'get',
-      url: 'http://localhost:3000',
+      url: 'http://localhost:9090',
     };
 
     const response = await axios(config)

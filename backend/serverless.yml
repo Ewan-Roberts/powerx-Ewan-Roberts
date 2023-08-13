@@ -23,3 +23,7 @@ functions:
 plugins:
   - serverless-esbuild
   - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 9090

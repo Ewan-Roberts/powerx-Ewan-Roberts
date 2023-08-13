@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { expect } from 'chai'
 
-describe('POST http://localhost:3000', function() {
+describe('POST http://localhost:9090', function() {
   it('returns a success response', async function() {
     const expected = {
       country: "United Kingdom",
@@ -10,7 +10,7 @@ describe('POST http://localhost:3000', function() {
 
     const config = {
       method: 'post',
-      url: 'http://localhost:3000',
+      url: 'http://localhost:9090',
       data: JSON.stringify(expected)
     };
 
@@ -36,7 +36,7 @@ describe('POST http://localhost:3000', function() {
 
     const config = {
       method: 'post',
-      url: 'http://localhost:3000',
+      url: 'http://localhost:9090',
       data: JSON.stringify(testData)
     };
 
@@ -57,7 +57,7 @@ describe('POST http://localhost:3000', function() {
 
     const config = {
       method: 'post',
-      url: 'http://localhost:3000',
+      url: 'http://localhost:9090',
       data: JSON.stringify(testData)
     };
 
