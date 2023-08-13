@@ -1,17 +1,20 @@
 # Software engineering test
 
-The project is split into front end and back end
+The project is split into frontend and backend
 
 ## Backend Getting Started
 ```
+You will likely need `serverless` installed globally
+npm i -g serverless
+
 cd backend
 npm i
-sls offline
+npm start
 ```
 
 ## Frontend Getting Started
 ```
-cd backend
+cd frontend
 npm i
 npm start
 ```
@@ -36,9 +39,5 @@ Due to time constraints the below are in the backlog
 - Add linting
 - Add application layer schema validation
 - Naming or the application layers endpoints
-
-## Bugs
-
-- Fix same port running for front and backend
-
+- Not require npx for running test suite
 

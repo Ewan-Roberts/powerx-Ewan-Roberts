@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "npx mocha --require ts-node/register --require esm test/**/*"
+    "test": "npx mocha --require ts-node/register --require esm test/**/*",
+    "start": "sls offline"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
@@ -29,7 +30,7 @@
   "directories": {
     "test": "test"
   },
-  "author": "",
+  "author": "Ewan Roberts",
   "license": "ISC",
-  "description": ""
+  "description": "Development test"
 }
