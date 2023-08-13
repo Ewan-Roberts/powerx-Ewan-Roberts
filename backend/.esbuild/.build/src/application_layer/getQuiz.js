@@ -13611,32 +13611,36 @@ function getRandomArrayIndex(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
   return randomIndex;
 }
-function randNum(array, excludeIndex) {
-  var randNumber = getRandomArrayIndex(array);
-  if (array[randNumber] === excludeIndex) {
-    return randNum(array, excludeIndex);
+function getRandomArrayIndexExcludingOne(array, excludeIndex) {
+  const randomIndex = getRandomArrayIndex(array);
+  if (array[randomIndex] === excludeIndex) {
+    return getRandomArrayIndexExcludingOne(array, excludeIndex);
   }
-  return randNumber;
+  return randomIndex;
 }
 async function getRandomCountryCapitals() {
-  const countryCapitalData = await countriesnow_default.getCountriesCapitals();
-  const indexOfCorrectCountry = getRandomArrayIndex(countryCapitalData);
-  const incorrectCapitalOne = countryCapitalData[randNum(countryCapitalData, indexOfCorrectCountry)].capital;
-  const incorrectCapitalTwo = countryCapitalData[randNum(countryCapitalData, indexOfCorrectCountry)].capital;
+  const countries = await countriesnow_default.getCountriesCapitals();
+  const indexOfCorrectCountry = getRandomArrayIndex(countries);
+  const seletedCountry = countries[indexOfCorrectCountry].name;
+  const correctCapital = countries[indexOfCorrectCountry].capital;
+  const indexOfIncorrectCountry = getRandomArrayIndexExcludingOne(countries, indexOfCorrectCountry);
+  const incorrectCapitalOne = countries[indexOfIncorrectCountry].capital;
+  const indexOfIncorrectCountryTwo = getRandomArrayIndexExcludingOne(countries, indexOfCorrectCountry);
+  const incorrectCapitalTwo = countries[indexOfIncorrectCountryTwo].capital;
   const suffledCapitals = [
-    countryCapitalData[indexOfCorrectCountry].capital,
+    correctCapital,
     incorrectCapitalOne,
     incorrectCapitalTwo
   ].sort(() => Math.random() - 0.5);
   const options = {
-    country: countryCapitalData[indexOfCorrectCountry].name,
+    country: seletedCountry,
     capitals: suffledCapitals
   };
   return options;
 }
 async function validateCountryCapital(countryName, capitalName) {
-  const countryCapitalData = await countriesnow_default.getCountriesCapitals();
-  const foundCountry = countryCapitalData.find((country) => country.name === countryName);
+  const countries = await countriesnow_default.getCountriesCapitals();
+  const foundCountry = countries.find((country) => country.name === countryName);
   if (!foundCountry) {
     throw new Error("Country not found");
   }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
+const API_ENDPOINT = 'http://localhost:9090';
+
 function valiadateResponse(event, posts) {
   const requestOptions = {
       method: 'POST',
@@ -10,34 +12,29 @@ function valiadateResponse(event, posts) {
         country: posts?.country
       })
   };
-  fetch('http://localhost:9090', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        alert(
-          `
-            ${data.message}
-            The country: ${data.country}
-            has the capital: ${data.capital}
-          `
-        )
-        window.location.reload(false);
-      });
+  fetch(API_ENDPOINT, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      alert(
+        `
+          ${data.message}
+          The country: ${data.country}
+          has the capital: ${data.capital}
+        `
+      )
+      .catch(err => alert(err.message));
 
+      window.location.reload(false);
+    });
 }
 
 function App() {
-   const [posts, setPosts] = useState([]);
+   const [quiz, setQuiz] = useState([]);
    useEffect(() => {
-      fetch('http://localhost:9090')
-         .then((response) => response.json())
-         .then((data) => {
-            console.log(data);
-            setPosts(data);
-         })
-         .catch((err) => {
-            console.log(err.message);
-         });
+      fetch(API_ENDPOINT)
+         .then(response => response.json())
+         .then(data => setQuiz(data))
+         .catch(err => alert(err.message));
    }, []);
 
   return (
@@ -45,15 +42,15 @@ function App() {
       <header className="App-header">
         <h2> What is the capital of </h2>
 
-        <h3> {posts?.country || 'Loading...'} </h3>
+        <h3> {quiz?.country || 'Loading...'} </h3>
 
         <h2> Choose a captial </h2>
 
         <button
-          value={(posts?.capitals)?posts?.capitals[0]:[]}
-          onClick={(e) => valiadateResponse(e, posts)}> {
-            (posts?.capitals)?
-            posts?.capitals[0]:
+          value={(quiz?.capitals)?quiz?.capitals[0]:[] }
+          onClick={(e) => valiadateResponse(e, quiz)}> {
+            (quiz?.capitals)?
+            quiz?.capitals[0]:
             'Loading...'
           }
         </button>
@@ -61,10 +58,10 @@ function App() {
         <br></br>
 
         <button
-          value={(posts?.capitals)?posts?.capitals[1]:[]}
-          onClick={(e) => valiadateResponse(e, posts)}> {
-            (posts?.capitals)?
-            posts?.capitals[1]:
+          value={(quiz?.capitals)?quiz?.capitals[1]:[]}
+          onClick={(e) => valiadateResponse(e, quiz)}> {
+            (quiz?.capitals)?
+            quiz?.capitals[1]:
             'Loading...'
           }
         </button>
@@ -72,10 +69,10 @@ function App() {
         <br></br>
 
         <button
-          value={(posts?.capitals)?posts?.capitals[2]:[]}
-          onClick={(e) => valiadateResponse(e, posts)}> {
-            (posts?.capitals)?
-            posts?.capitals[2]:
+          value={(quiz?.capitals)?quiz?.capitals[2]:[]}
+          onClick={(e) => valiadateResponse(e, quiz)}> {
+            (quiz?.capitals)?
+            quiz?.capitals[2]:
             'Loading...'
           }
         </button>
@@ -85,12 +82,13 @@ function App() {
         <br></br>
 
         <button
-          onClick={(e) => window.location.reload(false)}> {
+          onClick={() => window.location.reload(false)}> {
             'RESTART'
           }
         </button>
 
         <br></br>
+
       </header>
     </div>
   );

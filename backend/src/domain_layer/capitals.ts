@@ -8,43 +8,48 @@ function getRandomArrayIndex(array: Array<{
 }>) {
   const randomIndex = Math.floor(Math.random()*array.length);
 
-  return randomIndex
+  return randomIndex;
 }
 
-function randNum(array, excludeIndex) {
-  var randNumber = getRandomArrayIndex(array);
+function getRandomArrayIndexExcludingOne(array, excludeIndex) {
+  const randomIndex = getRandomArrayIndex(array);
 
-  if(array[randNumber] === excludeIndex){
-    return randNum(array, excludeIndex);
+  if(array[randomIndex] === excludeIndex){
+    return getRandomArrayIndexExcludingOne(array, excludeIndex);
   }
 
-  return randNumber;
+  return randomIndex;
 }
 
 export async function getRandomCountryCapitals(): Promise<{
   country: string;
   capitals: Array<string>;
 }> {
-  const countryCapitalData = await countriesnow.getCountriesCapitals();
+  const countries = await countriesnow.getCountriesCapitals();
 
-  const indexOfCorrectCountry = getRandomArrayIndex(countryCapitalData);
+  const indexOfCorrectCountry = getRandomArrayIndex(countries);
+  const seletedCountry = countries[indexOfCorrectCountry].name;
+  const correctCapital = countries[indexOfCorrectCountry].capital;
 
-  const incorrectCapitalOne = countryCapitalData[randNum(countryCapitalData, indexOfCorrectCountry)].capital
+  const indexOfIncorrectCountry = getRandomArrayIndexExcludingOne(countries, indexOfCorrectCountry);
+  const incorrectCapitalOne = countries[indexOfIncorrectCountry].capital
 
-  const incorrectCapitalTwo = countryCapitalData[randNum(countryCapitalData, indexOfCorrectCountry)].capital
+  const indexOfIncorrectCountryTwo = getRandomArrayIndexExcludingOne(countries, indexOfCorrectCountry);
+  const incorrectCapitalTwo = countries[indexOfIncorrectCountryTwo].capital
 
+  // Basic order shuffling, not perfectly random
   const suffledCapitals = [
-    countryCapitalData[indexOfCorrectCountry].capital,
+    correctCapital,
     incorrectCapitalOne,
     incorrectCapitalTwo
-  ].sort(() => Math.random() - 0.5)
+  ].sort(() => Math.random() - 0.5);
 
   const options = {
-    country: countryCapitalData[indexOfCorrectCountry].name,
+    country: seletedCountry,
     capitals: suffledCapitals
-  }
+  };
 
-  return options
+  return options;
 }
 
 export async function validateCountryCapital(countryName: string, capitalName: string): Promise<{
@@ -52,9 +57,9 @@ export async function validateCountryCapital(countryName: string, capitalName: s
   country: string;
   capital: string;
 }> {
-  const countryCapitalData = await countriesnow.getCountriesCapitals();
+  const countries = await countriesnow.getCountriesCapitals();
 
-  const foundCountry = countryCapitalData.find(country => country.name === countryName)
+  const foundCountry = countries.find(country => country.name === countryName);
 
   if(!foundCountry) {
     throw new Error('Country not found')

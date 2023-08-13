@@ -37,6 +37,7 @@ Due to time constraints the below are in the backlog
 
 - Mock api response to get more reliable domain layer tests
 - Add linting
+- Add more error handling
 - Add application layer schema validation
 - Naming or the application layers endpoints
 - Not require npx for running test suite
