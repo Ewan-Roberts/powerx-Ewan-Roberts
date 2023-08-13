@@ -13666,11 +13666,18 @@ var capitals_default = {
 
 // src/application_layer/getQuiz.ts
 async function handler() {
-  const countryCaptialData = await capitals_default.getRandomCountryCapitals();
-  return JSON.stringify({
-    statusCode: 200,
-    ...countryCaptialData
-  });
+  try {
+    const countryCaptialData = await capitals_default.getRandomCountryCapitals();
+    return JSON.stringify({
+      statusCode: 200,
+      ...countryCaptialData
+    });
+  } catch (error) {
+    return JSON.stringify({
+      statusCode: 500,
+      message: error.message
+    });
+  }
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

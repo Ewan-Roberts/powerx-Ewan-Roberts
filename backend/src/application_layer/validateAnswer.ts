@@ -8,11 +8,11 @@ export async function validate(
 
   // TODO Add joi schema validation here
   try {
-    const countryCaptialData = await captials.validateCountryCapital(country, capital);
+    const validated = await captials.validateCountryCapital(country, capital);
 
     return JSON.stringify({
       statusCode: 200,
-      ...countryCaptialData
+      ...validated
     });
   } catch(error) {
     return JSON.stringify({

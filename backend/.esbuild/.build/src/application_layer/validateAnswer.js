@@ -13668,10 +13668,10 @@ var capitals_default = {
 async function validate(event) {
   const { country, capital } = JSON.parse(event.body);
   try {
-    const countryCaptialData = await capitals_default.validateCountryCapital(country, capital);
+    const validated = await capitals_default.validateCountryCapital(country, capital);
     return JSON.stringify({
       statusCode: 200,
-      ...countryCaptialData
+      ...validated
     });
   } catch (error) {
     return JSON.stringify({
