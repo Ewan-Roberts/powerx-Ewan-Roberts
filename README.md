@@ -8,12 +8,21 @@ The task description can be found online at: https://powerxai.notion.site/Softwa
 
 In the project directory, you can run:
 
-### `npm run serve`
+To install the packages
+## `npm`
+To run the server
+## `npm run serve`
 
 Runs the app in the development mode at [http://localhost:3000](http://localhost:3000).
 
 The server will reload if you make edits.<br />
 You will also see any lint or type errors in the console.
+
+## To run the tests
+Run the server in one terminal window
+## `npm run serve`
+Run to perform full test suite
+## `npm run test`
 
 ## Improvements
 
