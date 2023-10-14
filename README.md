@@ -25,4 +25,5 @@ Due to time constraints on time the below are areas to improve backlog
 - Maybe adding domain layer / application layer was over engineering
 - Only success cases in the tests no failure cases
 - Would use a database or a local json file
+- Add linting
 - Use snake case for file and folder names but its a slight preference I have

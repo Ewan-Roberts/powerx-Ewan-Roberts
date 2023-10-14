@@ -1,5 +1,5 @@
+import dataAccessLayer, { Reading } from '../dataAccessLayer'
 import dataValidation from '../domainLayer/dataValidation'
-import dataAccessLayer, {Reading} from '../dataAccessLayer'
 
 export function get(from: string, to: string): Reading[] | {
   success: boolean

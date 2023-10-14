@@ -13,6 +13,7 @@ let database: Record<string, Reading> = {};
  */
 export const postReading = (key: string, reading: Reading): Reading => {
   database[key] = reading;
+
   return reading;
 };
 
@@ -23,10 +24,16 @@ export const getReading = (key: string): Reading | undefined => {
   return database[key];
 };
 
+/**
+ * Remove all data from memory
+ */
 export const purgeReading = (): void => {
   database = {};
 };
 
+/**
+ * Get all data from memory
+ */
 export const getAll = (): Record<string, Reading>=> {
   return database;
 };

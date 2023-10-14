@@ -1,4 +1,4 @@
-import dataAccessLayer, {Reading} from '../dataAccessLayer'
+import dataAccessLayer, { Reading } from '../dataAccessLayer'
 import dataValidation from '../domainLayer/dataValidation'
 
 export function post(bodyString: string): {

@@ -1,7 +1,7 @@
 import dataAccessLayer from '../../src/dataAccessLayer/index'
 import { expect } from 'chai'
 
-describe('dataAccessLayer/countriesnow', function() {
+describe('dataAccessLayer/index', function() {
   beforeEach(async () => {
     await dataAccessLayer.purgeReading()
   })

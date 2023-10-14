@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import { v4 as uuidv4 } from 'uuid';
 import dataAccessLayer from '../../src/dataAccessLayer'
 
-describe('domain_layer/dataValidation', function() {
+describe('domainLayer/dataValidation', function() {
   describe('parseSave()', function() {
     it('returns a correct value', async function() {
       // Normally I would mock the api response to get a clearer test result

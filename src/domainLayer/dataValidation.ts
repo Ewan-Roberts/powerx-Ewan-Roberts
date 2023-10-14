@@ -5,44 +5,47 @@ const CONVERSION_TO_MILLISECONDS = 1000;
 
 const NEW_LINE_FOR_DATA_PARSING = 3;
 
-function parseSave(dataString: string) {
-  const schema = [];
-  const split = dataString.split(' ');
+function parseSave(dataString: string): Array<Reading> {
+  const returnData = [];
+
+  const splitDataString = dataString.split(' ');
+  const arrayLength = splitDataString.length / NEW_LINE_FOR_DATA_PARSING
+
   let newLineForData = 0;
-
-  const arrayLength = split.length / NEW_LINE_FOR_DATA_PARSING
-
   for(let i = 0; i < arrayLength; i++) {
     const convertStringToUnix = Number(
-      Number(split[newLineForData]) * CONVERSION_TO_MILLISECONDS
+      Number(splitDataString[newLineForData]) * CONVERSION_TO_MILLISECONDS
     )
 
     const convertUnixToISODate = new Date(convertStringToUnix);
 
-    schema.push({
+    returnData.push({
       time:  convertUnixToISODate,
-      name:  split[newLineForData + 1],
-      value: split[newLineForData + 2]
+      name:  splitDataString[newLineForData + 1],
+      value: splitDataString[newLineForData + 2]
     })
 
     newLineForData += NEW_LINE_FOR_DATA_PARSING
   }
 
-  schema.forEach(async (data) => {
+  returnData.forEach(data => {
     const uuid = uuidv4();
-    await dataAccessLayer.postReading(uuid, data);
+    dataAccessLayer.postReading(uuid, data);
   })
 
-  return schema
+  return returnData
 }
 
-function getBetweenDateRanges(startDate: string, endDate: string): Array<Reading> {
+function getBetweenDateRanges(
+  startDate: string,
+  endDate: string
+): Array<Reading> {
   const allData = dataAccessLayer.getAll()
 
   const startDateTime = new Date(startDate).getTime()
   const endDateTime = new Date(endDate).getTime()
 
-  const result = Object.values(allData).map((data: any)=> {
+  const returnData = Object.values(allData).map((data: Reading)=> {
     const { time } = data;
     const dataTime = new Date(time).getTime();
     if(
@@ -55,7 +58,7 @@ function getBetweenDateRanges(startDate: string, endDate: string): Array<Reading
   // Removing undefined
   .filter(data => data);
 
-  return result;
+  return returnData;
 }
 
 export default {
