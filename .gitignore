@@ -2,7 +2,4 @@
 node_modules
 jspm_packages
 dist
-
-# Serverless directories
-.serverless
 .DS_Store
