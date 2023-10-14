@@ -1,44 +1,28 @@
-# Software engineering test
 
-The project is split into frontend and backend
 
-## Backend Getting Started
-```
-# You will likely need `serverless` installed globally
-npm i -g serverless
+This project was bootstrapped using Node.js + TypeScript + Express
 
-cd backend
-npm i
-npm start
-```
+The task description can be found online at: https://powerxai.notion.site/Software-Engineer-c2d8095970d94e78a39f1abd86533939
 
-## Frontend Getting Started
-```
-cd frontend
-npm i
-npm start
-```
+## Getting Started
 
-## End to end
+In the project directory, you can run:
 
-In order to have the full application running you will need to run the back end and front end together
+### `npm run serve`
 
-## Running tests
+Runs the app in the development mode at [http://localhost:3000](http://localhost:3000).
 
-To run the full test suite on the backend make sure the backend is running then run the command:
-
-```
-npm test
-```
+The server will reload if you make edits.<br />
+You will also see any lint or type errors in the console.
 
 ## Improvements
 
-Due to time constraints the below are in the backlog
+Due to time constraints on time the below are areas to improve backlog
 
-- Mock api response to get more reliable domain layer tests
-- Add linting
-- Add more error handling
-- Add application layer schema validation
-- Naming or the application layers endpoints
-- Not require npx for running test suite
-
+- Finish 'The GET endpoint should also return an average Power reading for each day within the query range.'
+- Bug where when running POST endpoint with express memory of data isn't preserved between instances
+- Add back strict for TypeScript types
+- Maybe adding domain layer / application layer was over engineering
+- Only success cases in the tests no failure cases
+- Would use a database or a local json file
+- Use snake case for file and folder names but its a slight preference I have
