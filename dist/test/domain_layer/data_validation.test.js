@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var dataValidation_1 = __importDefault(require("../../src/domain_layer/dataValidation"));
+var data_validation_1 = __importDefault(require("../../src/domain_layer/data_validation"));
 var chai_1 = require("chai");
 var uuid_1 = require("uuid");
 var data_access_layer_1 = __importDefault(require("../../src/data_access_layer"));
@@ -52,7 +52,7 @@ describe('domain_layer/dataValidation', function () {
                     switch (_a.label) {
                         case 0:
                             inputString = '1649941817 Voltage 1.34 1649941818 Voltage 1.35 1649941817 Current 12.0 1649941818 Current 14.0';
-                            return [4 /*yield*/, dataValidation_1.default.parseSave(inputString)];
+                            return [4 /*yield*/, data_validation_1.default.parseSave(inputString)];
                         case 1:
                             response = _a.sent();
                             (0, chai_1.expect)(response).to.deep.equal([{
@@ -118,7 +118,7 @@ describe('domain_layer/dataValidation', function () {
                             _a.sent();
                             from = '2021-01-01';
                             to = '2023-01-01';
-                            return [4 /*yield*/, dataValidation_1.default.getBetweenDateRanges(from, to)];
+                            return [4 /*yield*/, data_validation_1.default.getBetweenDateRanges(from, to)];
                         case 4:
                             response = _a.sent();
                             (0, chai_1.expect)(response).to.deep.equal([{

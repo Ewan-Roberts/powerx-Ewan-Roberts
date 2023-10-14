@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.post = void 0;
-var dataValidation_1 = __importDefault(require("../domain_layer/dataValidation"));
+var data_validation_1 = __importDefault(require("../domain_layer/data_validation"));
 function post(bodyString) {
     var parsedBody;
     try {
-        dataValidation_1.default.parseSave(bodyString);
+        data_validation_1.default.parseSave(bodyString);
         return {
             success: true
         };

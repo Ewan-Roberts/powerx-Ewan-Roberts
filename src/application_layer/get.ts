@@ -1,4 +1,4 @@
-import dataValidation from '../domain_layer/dataValidation'
+import dataValidation from '../domain_layer/data_validation'
 import data_access_layer, {Reading} from '../data_access_layer'
 
 export function get(from: string, to: string): Reading[] | {

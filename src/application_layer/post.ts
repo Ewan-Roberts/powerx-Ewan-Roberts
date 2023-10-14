@@ -1,5 +1,5 @@
 import data_access_layer, {Reading} from '../data_access_layer'
-import dataValidation from '../domain_layer/dataValidation'
+import dataValidation from '../domain_layer/data_validation'
 
 export function post(bodyString: string): {
   success: boolean

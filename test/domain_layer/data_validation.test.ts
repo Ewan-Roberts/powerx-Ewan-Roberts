@@ -1,4 +1,4 @@
-import dataValidation from '../../src/domain_layer/dataValidation'
+import dataValidation from '../../src/domain_layer/data_validation'
 import { expect } from 'chai'
 import { v4 as uuidv4 } from 'uuid';
 import data_access_layer from '../../src/data_access_layer'
