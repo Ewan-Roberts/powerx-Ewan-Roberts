@@ -1,7 +1,7 @@
-import dataValidation from '../../src/domain_layer/data_validation'
+import dataValidation from '../../src/domainLayer/dataValidation'
 import { expect } from 'chai'
 import { v4 as uuidv4 } from 'uuid';
-import data_access_layer from '../../src/data_access_layer'
+import dataAccessLayer from '../../src/dataAccessLayer'
 
 describe('domain_layer/dataValidation', function() {
   describe('parseSave()', function() {
@@ -32,7 +32,8 @@ describe('domain_layer/dataValidation', function() {
           value: '14.0'
         }
       ])
-      data_access_layer.purgeReading()
+      // TODO after each
+      dataAccessLayer.purgeReading()
     });
   });
 
@@ -43,17 +44,17 @@ describe('domain_layer/dataValidation', function() {
       const secondUUID = uuidv4();
       const thirdUUID = uuidv4();
       // Normally I would mock the api response to get a clearer test result
-      await data_access_layer.postReading(firstUUID, {
+      await dataAccessLayer.postReading(firstUUID, {
         time: new Date('2020-04-14T13:10:17.000Z'),
         name: 'Voltage',
         value: '1.34'
       })
-      await data_access_layer.postReading(secondUUID, {
+      await dataAccessLayer.postReading(secondUUID, {
         time: new Date('2021-05-14T13:10:17.000Z'),
         name: 'Voltage',
         value: '1.35'
       })
-      await data_access_layer.postReading(thirdUUID, {
+      await dataAccessLayer.postReading(thirdUUID, {
         time: new Date('2022-06-14T13:10:17.000Z'),
         name: 'Voltage',
         value: '1.35'
@@ -75,7 +76,8 @@ describe('domain_layer/dataValidation', function() {
           value: '1.35'
         }
       ])
-      data_access_layer.purgeReading()
+      // TODO after each
+      dataAccessLayer.purgeReading()
     });
   });
 });

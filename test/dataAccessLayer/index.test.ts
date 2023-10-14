@@ -1,13 +1,13 @@
-import data_access_layer from '../../src/data_access_layer/index'
+import dataAccessLayer from '../../src/dataAccessLayer/index'
 import { expect } from 'chai'
 
-describe('data_access_layer/countriesnow', function() {
+describe('dataAccessLayer/countriesnow', function() {
   beforeEach(async () => {
-    await data_access_layer.purgeReading()
+    await dataAccessLayer.purgeReading()
   })
 
   afterEach(async () => {
-    await data_access_layer.purgeReading()
+    await dataAccessLayer.purgeReading()
   })
 
   describe('get()', function() {
@@ -17,9 +17,9 @@ describe('data_access_layer/countriesnow', function() {
         name: 'Voltage',
         value: '1.35'
       };
-      await data_access_layer.postReading('test', testData)
+      await dataAccessLayer.postReading('test', testData)
 
-      const actual = await data_access_layer.getReading('test')
+      const actual = await dataAccessLayer.getReading('test')
       expect(actual).to.deep.equal(testData)
     });
   });
@@ -31,9 +31,9 @@ describe('data_access_layer/countriesnow', function() {
         name: 'Voltage',
         value: '1.35'
       };
-      await data_access_layer.postReading('test', testData)
+      await dataAccessLayer.postReading('test', testData)
 
-      const actual = await data_access_layer.getReading('test')
+      const actual = await dataAccessLayer.getReading('test')
       expect(actual).to.deep.equal(testData)
     });
   });
@@ -45,10 +45,10 @@ describe('data_access_layer/countriesnow', function() {
         name: 'Voltage',
         value: '1.35'
       };
-      await data_access_layer.postReading('test', testData)
+      await dataAccessLayer.postReading('test', testData)
 
-      await data_access_layer.purgeReading()
-      const actual = await data_access_layer.getReading('test')
+      await dataAccessLayer.purgeReading()
+      const actual = await dataAccessLayer.getReading('test')
       expect(actual).to.equal(undefined)
     });
   });

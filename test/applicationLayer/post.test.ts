@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { expect } from 'chai'
 
-import data_access_layer from '../../src/data_access_layer'
+import dataAccessLayer from '../../src/dataAccessLayer'
 
 const LOCAL_PORT = 3000
 
@@ -19,6 +19,7 @@ describe('POST http://localhost:3000/data', function() {
 
     expect(response.data).to.deep.equal({ success: true })
 
-    data_access_layer.purgeReading()
+    // TODO put afterAll
+    dataAccessLayer.purgeReading()
   });
 });

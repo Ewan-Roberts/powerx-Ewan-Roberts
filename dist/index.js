@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var helmet_1 = __importDefault(require("helmet"));
 var dotenv_1 = __importDefault(require("dotenv"));
-var application_layer_1 = __importDefault(require("./src/application_layer"));
+var applicationLayer_1 = __importDefault(require("./src/applicationLayer"));
 var body_parser_1 = __importDefault(require("body-parser"));
 dotenv_1.default.config();
 var PORT = process.env.PORT || 3000;
@@ -55,7 +55,7 @@ app.post('/data', function (req, res) { return __awaiter(void 0, void 0, void 0,
     var result;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, application_layer_1.default.post(req.body)];
+            case 0: return [4 /*yield*/, applicationLayer_1.default.post(req.body)];
             case 1:
                 result = _a.sent();
                 return [2 /*return*/, res.json(result)];
@@ -66,7 +66,7 @@ app.get('/data', function (req, res) { return __awaiter(void 0, void 0, void 0, 
     var result;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, application_layer_1.default.get(req.query.from, req.query.to)];
+            case 0: return [4 /*yield*/, applicationLayer_1.default.get(req.query.from, req.query.to)];
             case 1:
                 result = _a.sent();
                 return [2 /*return*/, res.json({ result: result })];
